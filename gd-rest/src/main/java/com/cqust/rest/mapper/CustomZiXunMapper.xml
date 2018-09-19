@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cqust.rest.mapper.CustomZiXunMapper">
+	<resultMap id="zxTypeResultMap" type="com.cqust.pojo.TZxtype">
+		<result column="id" property="id" />
+		<result column="zxtypename" property="zxtypename" />
+		<result column="createtime" property="createtime" />
+		<result column="updatetime" property="updatetime" />
+		<result column="author" property="author" />
+	</resultMap>
+
+
+	<select id="zxtypeList" resultType="com.cqust.pojo.TZxtype">
+		SELECT
+		*
+		FROM
+		t_zxtype
+	</select>
+
+	<select id="getzixuninfos" parameterType="java.lang.Integer"
+		resultType="com.cqust.rest.pojo.ZiXunInfo">
+		select
+		a.id,a.title,a.createtime,a.updatetime,a.infortext,a.author,a.zxtypeid,b.zxtypename
+		from
+		t_zxinfo a,t_zxtype b
+		WHERE
+		a.zxtypeid = b.id
+		<if test="type != null and type !=''">
+			and a.zxtypeid = #{type}
+		</if>
+	</select>
+	
+		<select id="getzixuninfo" resultType="com.cqust.rest.pojo.ZiXunInfo">
+		select
+		a.id,a.title,a.createtime,a.updatetime,a.infortext,a.author,a.zxtypeid,b.zxtypename
+		from
+		t_zxinfo a,t_zxtype b
+		WHERE
+		a.zxtypeid = b.id		 		
+	</select>
+
+   <select id="getzixuninfobytype" parameterType="java.lang.Integer"
+		resultType="com.cqust.rest.pojo.ZiXunInfo">
+		select
+		a.id,a.title,a.createtime,a.updatetime,a.infortext,a.author,a.zxtypeid,b.zxtypename
+		from
+		t_zxinfo a,t_zxtype b
+		WHERE
+		a.zxtypeid = b.id and a.zxtypeid = #{0}	
+	</select>
+
+	<select id="getzixuninfobyid" parameterType="java.lang.Integer"
+		resultType="com.cqust.rest.pojo.ZiXunInfo">
+		select
+		a.id,a.title,a.createtime,a.updatetime,a.infortext,a.author,a.zxtypeid,b.zxtypename
+		from
+		t_zxinfo a,t_zxtype b
+		WHERE
+		a.zxtypeid = b.id
+		and a.id = #{id}
+	</select>
+
+</mapper>

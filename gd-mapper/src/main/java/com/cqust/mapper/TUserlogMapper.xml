@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cqust.mapper.TUserlogMapper" >
+  <resultMap id="BaseResultMap" type="com.cqust.pojo.TUserlog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="loginDate" property="logindate" jdbcType="TIMESTAMP" />
+    <result column="loginIP" property="loginip" jdbcType="VARCHAR" />
+    <result column="loginstatus" property="loginstatus" jdbcType="INTEGER" />
+    <result column="loginps" property="loginps" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, uid, username, loginDate, loginIP, loginstatus, loginps
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cqust.pojo.TUserlogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_userlog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_userlog
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_userlog
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cqust.pojo.TUserlogExample" >
+    delete from t_userlog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cqust.pojo.TUserlog" >
+    insert into t_userlog (id, uid, username, 
+      loginDate, loginIP, loginstatus, 
+      loginps)
+    values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
+      #{logindate,jdbcType=TIMESTAMP}, #{loginip,jdbcType=VARCHAR}, #{loginstatus,jdbcType=INTEGER}, 
+      #{loginps,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cqust.pojo.TUserlog" >
+    insert into t_userlog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="logindate != null" >
+        loginDate,
+      </if>
+      <if test="loginip != null" >
+        loginIP,
+      </if>
+      <if test="loginstatus != null" >
+        loginstatus,
+      </if>
+      <if test="loginps != null" >
+        loginps,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="logindate != null" >
+        #{logindate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginip != null" >
+        #{loginip,jdbcType=VARCHAR},
+      </if>
+      <if test="loginstatus != null" >
+        #{loginstatus,jdbcType=INTEGER},
+      </if>
+      <if test="loginps != null" >
+        #{loginps,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cqust.pojo.TUserlogExample" resultType="java.lang.Integer" >
+    select count(*) from t_userlog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_userlog
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=INTEGER},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logindate != null" >
+        loginDate = #{record.logindate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.loginip != null" >
+        loginIP = #{record.loginip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginstatus != null" >
+        loginstatus = #{record.loginstatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.loginps != null" >
+        loginps = #{record.loginps,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_userlog
+    set id = #{record.id,jdbcType=INTEGER},
+      uid = #{record.uid,jdbcType=INTEGER},
+      username = #{record.username,jdbcType=VARCHAR},
+      loginDate = #{record.logindate,jdbcType=TIMESTAMP},
+      loginIP = #{record.loginip,jdbcType=VARCHAR},
+      loginstatus = #{record.loginstatus,jdbcType=INTEGER},
+      loginps = #{record.loginps,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cqust.pojo.TUserlog" >
+    update t_userlog
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="logindate != null" >
+        loginDate = #{logindate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginip != null" >
+        loginIP = #{loginip,jdbcType=VARCHAR},
+      </if>
+      <if test="loginstatus != null" >
+        loginstatus = #{loginstatus,jdbcType=INTEGER},
+      </if>
+      <if test="loginps != null" >
+        loginps = #{loginps,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cqust.pojo.TUserlog" >
+    update t_userlog
+    set uid = #{uid,jdbcType=INTEGER},
+      username = #{username,jdbcType=VARCHAR},
+      loginDate = #{logindate,jdbcType=TIMESTAMP},
+      loginIP = #{loginip,jdbcType=VARCHAR},
+      loginstatus = #{loginstatus,jdbcType=INTEGER},
+      loginps = #{loginps,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cqust.mapper.TVipdietapplicationMapper" >
+  <resultMap id="BaseResultMap" type="com.cqust.pojo.TVipdietapplication" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="userName" property="username" jdbcType="VARCHAR" />
+    <result column="sqDate" property="sqdate" jdbcType="TIMESTAMP" />
+    <result column="sqStatus" property="sqstatus" jdbcType="INTEGER" />
+    <result column="dietitianId" property="dietitianid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, userId, userName, sqDate, sqStatus, dietitianId
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cqust.pojo.TVipdietapplicationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_vipdietapplication
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_vipdietapplication
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_vipdietapplication
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cqust.pojo.TVipdietapplicationExample" >
+    delete from t_vipdietapplication
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cqust.pojo.TVipdietapplication" >
+    insert into t_vipdietapplication (id, userId, userName, 
+      sqDate, sqStatus, dietitianId
+      )
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
+      #{sqdate,jdbcType=TIMESTAMP}, #{sqstatus,jdbcType=INTEGER}, #{dietitianid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cqust.pojo.TVipdietapplication" >
+    insert into t_vipdietapplication
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="username != null" >
+        userName,
+      </if>
+      <if test="sqdate != null" >
+        sqDate,
+      </if>
+      <if test="sqstatus != null" >
+        sqStatus,
+      </if>
+      <if test="dietitianid != null" >
+        dietitianId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="sqdate != null" >
+        #{sqdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sqstatus != null" >
+        #{sqstatus,jdbcType=INTEGER},
+      </if>
+      <if test="dietitianid != null" >
+        #{dietitianid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cqust.pojo.TVipdietapplicationExample" resultType="java.lang.Integer" >
+    select count(*) from t_vipdietapplication
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_vipdietapplication
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.username != null" >
+        userName = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sqdate != null" >
+        sqDate = #{record.sqdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sqstatus != null" >
+        sqStatus = #{record.sqstatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.dietitianid != null" >
+        dietitianId = #{record.dietitianid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_vipdietapplication
+    set id = #{record.id,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
+      userName = #{record.username,jdbcType=VARCHAR},
+      sqDate = #{record.sqdate,jdbcType=TIMESTAMP},
+      sqStatus = #{record.sqstatus,jdbcType=INTEGER},
+      dietitianId = #{record.dietitianid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cqust.pojo.TVipdietapplication" >
+    update t_vipdietapplication
+    <set >
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="sqdate != null" >
+        sqDate = #{sqdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sqstatus != null" >
+        sqStatus = #{sqstatus,jdbcType=INTEGER},
+      </if>
+      <if test="dietitianid != null" >
+        dietitianId = #{dietitianid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cqust.pojo.TVipdietapplication" >
+    update t_vipdietapplication
+    set userId = #{userid,jdbcType=INTEGER},
+      userName = #{username,jdbcType=VARCHAR},
+      sqDate = #{sqdate,jdbcType=TIMESTAMP},
+      sqStatus = #{sqstatus,jdbcType=INTEGER},
+      dietitianId = #{dietitianid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

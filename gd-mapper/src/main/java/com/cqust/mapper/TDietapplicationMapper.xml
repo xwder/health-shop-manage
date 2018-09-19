@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cqust.mapper.TDietapplicationMapper" >
+  <resultMap id="BaseResultMap" type="com.cqust.pojo.TDietapplication" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="userName" property="username" jdbcType="VARCHAR" />
+    <result column="uID" property="uid" jdbcType="VARCHAR" />
+    <result column="uIDImagesUrl" property="uidimagesurl" jdbcType="VARCHAR" />
+    <result column="dietLicense" property="dietlicense" jdbcType="VARCHAR" />
+    <result column="dietImageUrl" property="dietimageurl" jdbcType="VARCHAR" />
+    <result column="sqDate" property="sqdate" jdbcType="TIMESTAMP" />
+    <result column="sqStatus" property="sqstatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, userId, userName, uID, uIDImagesUrl, dietLicense, dietImageUrl, sqDate, sqStatus
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cqust.pojo.TDietapplicationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_dietapplication
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_dietapplication
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_dietapplication
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cqust.pojo.TDietapplicationExample" >
+    delete from t_dietapplication
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cqust.pojo.TDietapplication" >
+    insert into t_dietapplication (id, userId, userName, 
+      uID, uIDImagesUrl, dietLicense, 
+      dietImageUrl, sqDate, sqStatus
+      )
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
+      #{uid,jdbcType=VARCHAR}, #{uidimagesurl,jdbcType=VARCHAR}, #{dietlicense,jdbcType=VARCHAR}, 
+      #{dietimageurl,jdbcType=VARCHAR}, #{sqdate,jdbcType=TIMESTAMP}, #{sqstatus,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cqust.pojo.TDietapplication" >
+    insert into t_dietapplication
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="username != null" >
+        userName,
+      </if>
+      <if test="uid != null" >
+        uID,
+      </if>
+      <if test="uidimagesurl != null" >
+        uIDImagesUrl,
+      </if>
+      <if test="dietlicense != null" >
+        dietLicense,
+      </if>
+      <if test="dietimageurl != null" >
+        dietImageUrl,
+      </if>
+      <if test="sqdate != null" >
+        sqDate,
+      </if>
+      <if test="sqstatus != null" >
+        sqStatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="uidimagesurl != null" >
+        #{uidimagesurl,jdbcType=VARCHAR},
+      </if>
+      <if test="dietlicense != null" >
+        #{dietlicense,jdbcType=VARCHAR},
+      </if>
+      <if test="dietimageurl != null" >
+        #{dietimageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="sqdate != null" >
+        #{sqdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sqstatus != null" >
+        #{sqstatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cqust.pojo.TDietapplicationExample" resultType="java.lang.Integer" >
+    select count(*) from t_dietapplication
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_dietapplication
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.username != null" >
+        userName = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uid != null" >
+        uID = #{record.uid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uidimagesurl != null" >
+        uIDImagesUrl = #{record.uidimagesurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dietlicense != null" >
+        dietLicense = #{record.dietlicense,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dietimageurl != null" >
+        dietImageUrl = #{record.dietimageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sqdate != null" >
+        sqDate = #{record.sqdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sqstatus != null" >
+        sqStatus = #{record.sqstatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_dietapplication
+    set id = #{record.id,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
+      userName = #{record.username,jdbcType=VARCHAR},
+      uID = #{record.uid,jdbcType=VARCHAR},
+      uIDImagesUrl = #{record.uidimagesurl,jdbcType=VARCHAR},
+      dietLicense = #{record.dietlicense,jdbcType=VARCHAR},
+      dietImageUrl = #{record.dietimageurl,jdbcType=VARCHAR},
+      sqDate = #{record.sqdate,jdbcType=TIMESTAMP},
+      sqStatus = #{record.sqstatus,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cqust.pojo.TDietapplication" >
+    update t_dietapplication
+    <set >
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        uID = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="uidimagesurl != null" >
+        uIDImagesUrl = #{uidimagesurl,jdbcType=VARCHAR},
+      </if>
+      <if test="dietlicense != null" >
+        dietLicense = #{dietlicense,jdbcType=VARCHAR},
+      </if>
+      <if test="dietimageurl != null" >
+        dietImageUrl = #{dietimageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="sqdate != null" >
+        sqDate = #{sqdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sqstatus != null" >
+        sqStatus = #{sqstatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cqust.pojo.TDietapplication" >
+    update t_dietapplication
+    set userId = #{userid,jdbcType=INTEGER},
+      userName = #{username,jdbcType=VARCHAR},
+      uID = #{uid,jdbcType=VARCHAR},
+      uIDImagesUrl = #{uidimagesurl,jdbcType=VARCHAR},
+      dietLicense = #{dietlicense,jdbcType=VARCHAR},
+      dietImageUrl = #{dietimageurl,jdbcType=VARCHAR},
+      sqDate = #{sqdate,jdbcType=TIMESTAMP},
+      sqStatus = #{sqstatus,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

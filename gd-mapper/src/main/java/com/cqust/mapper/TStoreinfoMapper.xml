@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cqust.mapper.TStoreinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.cqust.pojo.TStoreinfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="storelogoimg" property="storelogoimg" jdbcType="VARCHAR" />
+    <result column="storeName" property="storename" jdbcType="VARCHAR" />
+    <result column="sName" property="sname" jdbcType="VARCHAR" />
+    <result column="sPhone" property="sphone" jdbcType="VARCHAR" />
+    <result column="sID" property="sid" jdbcType="VARCHAR" />
+    <result column="sLicense" property="slicense" jdbcType="VARCHAR" />
+    <result column="sdz" property="sdz" jdbcType="VARCHAR" />
+    <result column="sAddr" property="saddr" jdbcType="VARCHAR" />
+    <result column="is_check" property="isCheck" jdbcType="INTEGER" />
+    <result column="sType" property="stype" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, userid, storelogoimg, storeName, sName, sPhone, sID, sLicense, sdz, sAddr, is_check, 
+    sType
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cqust.pojo.TStoreinfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_storeinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_storeinfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_storeinfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cqust.pojo.TStoreinfoExample" >
+    delete from t_storeinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cqust.pojo.TStoreinfo" >
+    insert into t_storeinfo (id, userid, storelogoimg, 
+      storeName, sName, sPhone, 
+      sID, sLicense, sdz, 
+      sAddr, is_check, sType
+      )
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{storelogoimg,jdbcType=VARCHAR}, 
+      #{storename,jdbcType=VARCHAR}, #{sname,jdbcType=VARCHAR}, #{sphone,jdbcType=VARCHAR}, 
+      #{sid,jdbcType=VARCHAR}, #{slicense,jdbcType=VARCHAR}, #{sdz,jdbcType=VARCHAR}, 
+      #{saddr,jdbcType=VARCHAR}, #{isCheck,jdbcType=INTEGER}, #{stype,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cqust.pojo.TStoreinfo" >
+    insert into t_storeinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="storelogoimg != null" >
+        storelogoimg,
+      </if>
+      <if test="storename != null" >
+        storeName,
+      </if>
+      <if test="sname != null" >
+        sName,
+      </if>
+      <if test="sphone != null" >
+        sPhone,
+      </if>
+      <if test="sid != null" >
+        sID,
+      </if>
+      <if test="slicense != null" >
+        sLicense,
+      </if>
+      <if test="sdz != null" >
+        sdz,
+      </if>
+      <if test="saddr != null" >
+        sAddr,
+      </if>
+      <if test="isCheck != null" >
+        is_check,
+      </if>
+      <if test="stype != null" >
+        sType,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="storelogoimg != null" >
+        #{storelogoimg,jdbcType=VARCHAR},
+      </if>
+      <if test="storename != null" >
+        #{storename,jdbcType=VARCHAR},
+      </if>
+      <if test="sname != null" >
+        #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="sphone != null" >
+        #{sphone,jdbcType=VARCHAR},
+      </if>
+      <if test="sid != null" >
+        #{sid,jdbcType=VARCHAR},
+      </if>
+      <if test="slicense != null" >
+        #{slicense,jdbcType=VARCHAR},
+      </if>
+      <if test="sdz != null" >
+        #{sdz,jdbcType=VARCHAR},
+      </if>
+      <if test="saddr != null" >
+        #{saddr,jdbcType=VARCHAR},
+      </if>
+      <if test="isCheck != null" >
+        #{isCheck,jdbcType=INTEGER},
+      </if>
+      <if test="stype != null" >
+        #{stype,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cqust.pojo.TStoreinfoExample" resultType="java.lang.Integer" >
+    select count(*) from t_storeinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_storeinfo
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        userid = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.storelogoimg != null" >
+        storelogoimg = #{record.storelogoimg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storename != null" >
+        storeName = #{record.storename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sname != null" >
+        sName = #{record.sname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sphone != null" >
+        sPhone = #{record.sphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sid != null" >
+        sID = #{record.sid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.slicense != null" >
+        sLicense = #{record.slicense,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sdz != null" >
+        sdz = #{record.sdz,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saddr != null" >
+        sAddr = #{record.saddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isCheck != null" >
+        is_check = #{record.isCheck,jdbcType=INTEGER},
+      </if>
+      <if test="record.stype != null" >
+        sType = #{record.stype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_storeinfo
+    set id = #{record.id,jdbcType=INTEGER},
+      userid = #{record.userid,jdbcType=INTEGER},
+      storelogoimg = #{record.storelogoimg,jdbcType=VARCHAR},
+      storeName = #{record.storename,jdbcType=VARCHAR},
+      sName = #{record.sname,jdbcType=VARCHAR},
+      sPhone = #{record.sphone,jdbcType=VARCHAR},
+      sID = #{record.sid,jdbcType=VARCHAR},
+      sLicense = #{record.slicense,jdbcType=VARCHAR},
+      sdz = #{record.sdz,jdbcType=VARCHAR},
+      sAddr = #{record.saddr,jdbcType=VARCHAR},
+      is_check = #{record.isCheck,jdbcType=INTEGER},
+      sType = #{record.stype,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cqust.pojo.TStoreinfo" >
+    update t_storeinfo
+    <set >
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="storelogoimg != null" >
+        storelogoimg = #{storelogoimg,jdbcType=VARCHAR},
+      </if>
+      <if test="storename != null" >
+        storeName = #{storename,jdbcType=VARCHAR},
+      </if>
+      <if test="sname != null" >
+        sName = #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="sphone != null" >
+        sPhone = #{sphone,jdbcType=VARCHAR},
+      </if>
+      <if test="sid != null" >
+        sID = #{sid,jdbcType=VARCHAR},
+      </if>
+      <if test="slicense != null" >
+        sLicense = #{slicense,jdbcType=VARCHAR},
+      </if>
+      <if test="sdz != null" >
+        sdz = #{sdz,jdbcType=VARCHAR},
+      </if>
+      <if test="saddr != null" >
+        sAddr = #{saddr,jdbcType=VARCHAR},
+      </if>
+      <if test="isCheck != null" >
+        is_check = #{isCheck,jdbcType=INTEGER},
+      </if>
+      <if test="stype != null" >
+        sType = #{stype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cqust.pojo.TStoreinfo" >
+    update t_storeinfo
+    set userid = #{userid,jdbcType=INTEGER},
+      storelogoimg = #{storelogoimg,jdbcType=VARCHAR},
+      storeName = #{storename,jdbcType=VARCHAR},
+      sName = #{sname,jdbcType=VARCHAR},
+      sPhone = #{sphone,jdbcType=VARCHAR},
+      sID = #{sid,jdbcType=VARCHAR},
+      sLicense = #{slicense,jdbcType=VARCHAR},
+      sdz = #{sdz,jdbcType=VARCHAR},
+      sAddr = #{saddr,jdbcType=VARCHAR},
+      is_check = #{isCheck,jdbcType=INTEGER},
+      sType = #{stype,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

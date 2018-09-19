@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cqust.manager.mapper.ProductBrowseMapper">
+
+	<select id="getproductrecord" resultType="com.cqust.manager.pojo.ProductBrowseRecord">
+		select
+		a.id,a.pid,a.uid,a.username,a.browsetime,a.usertype,a.userip,b.pname,c.storename
+		from
+		t_pbrowserecord a,t_product b,t_storeinfo c
+		WHERE
+		a.pid = b.id and a.sid = c.id	
+	</select>
+	
+</mapper>

@@ -1,0 +1,106 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.clear {
+    clear: both;
+}
+
+#container {
+    width: 1100px;
+    margin: 0 auto;
+}
+
+body {
+    margin: 0;
+    font-family: ÃƒÂ¥Ã‚Â¾Ã‚Â®ÃƒÂ¨Ã‚Â½Ã‚Â¯ÃƒÂ©Ã¢â‚¬ÂºÃ¢â‚¬Â¦ÃƒÂ©Ã‚Â»Ã¢â‚¬Ëœ;
+    font-size: 12px;
+    line-height: 18px;
+    color: rgb(51, 51, 51);
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.top {
+    position: relative;
+    z-index: 7691;
+    clear: both;
+    width: 100%;
+    font-size: 0;
+    min-width: 990px;
+}
+
+.top_banner {
+    width: 100%;
+    height: 30px;
+    border-bottom: solid 1px lightgray;
+}
+
+.top_banner_left {
+    width: 30%;
+    height: 100%;
+    float: left;
+    padding-left: 67px;
+    padding-top: 5px;
+}
+
+.top_banner_right {
+    width: 30%;
+    height: 100%;
+    float: right;
+}
+
+.top_banner_right_user {
+    float: right;
+    width: 65px;
+    height: 100%;
+    padding-top: 5px;
+}
+
+.user_slide {
+    display: none;
+    width: 100%;
+    margin-top: 7px;
+}
+
+#head {
+    width: 100%;
+    margin-top: 10px;
+}
+
+#head .head_left {
+    width: 30%;
+    float: left;
+}
+
+#head .head_right {
+    width: 40%;
+    height: 33px;
+    float: right;
+}
+
+#shop_list {
+    width: 100%;
+}
+
+.shop_list_item {
+    width: 100%;
+    height: 140px;
+    padding-top: 30px;
+    border-bottom: solid 1px lightgray;
+
+}
+
+.shop_list_item_left {
+    width: 20%;
+    float: left;
+}
+
+.shop_list_item_right {
+    margin-left: 10px;
+    float: left;
+}

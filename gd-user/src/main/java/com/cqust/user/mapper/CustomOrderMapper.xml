@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cqust.user.mapper.CustomOrderMapper">
+
+	<resultMap id="OrderResultMap" type="com.cqust.pojo.TOrder">
+		<id column="id" property="id"   />
+		<result column="total" property="total" />
+		<result column="orderTime" property="ordertime" />
+		<result column="orderStates" property="orderstates" />
+		<result column="userName" property="username" />
+		<result column="userPhone" property="userphone" />
+		<result column="userAddr" property="useraddr" />
+		<result column="userId" property="userid" />
+		<result column="message" property="message" />
+		<result column="delstatus" property="delstatus" />
+		<result column="ordercomment" property="ordercomment" />
+	</resultMap>
+
+	<select id="getAllOrders" parameterType="java.lang.Integer"  resultType="com.cqust.pojo.TOrder">
+		SELECT
+		*
+		FROM
+		t_order
+		where userId = #{uid}
+		order by
+		orderTime desc
+	</select>
+	<select id="getAllWwcOrders" parameterType="java.lang.Integer"  resultType="com.cqust.pojo.TOrder">
+		SELECT
+		*
+		FROM 
+		t_order o
+		where o.userId = #{uid}
+		and o.orderStates != 2
+		and o.orderStates != 5
+		order by
+		orderTime desc
+	</select>
+
+	<select id="getOrdersByOrderStates" parameterType="java.util.Map" resultMap="OrderResultMap">
+		SELECT
+		*
+		FROM
+		t_order
+		where orderStates = #{orderStates} 
+		and userId = #{uid}
+		order by orderTime desc
+	</select>
+
+
+
+</mapper>

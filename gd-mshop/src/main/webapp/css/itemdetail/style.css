@@ -1,0 +1,107 @@
+/* css 重置 */
+
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+}
+
+body {
+    background: #fff;
+    font: normal 12px/22px 宋体;
+    background: #F5F8FA none repeat scroll 0% 0%;
+}
+
+img {
+    border: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+a:hover {
+    color: #1974A1;
+    text-decoration: none;
+}
+
+
+/* 本例子css */
+
+.www360buy {
+    width: 100%;
+   /*  margin: 30px auto; */
+    border-top: 2px solid #c00;
+}
+
+.www360buy .hd {
+    overflow: hidden;
+    background: url(../images/item/bg.png) 0 -32px #efefef;
+    border-left: 1px solid #ddd;
+}
+
+.www360buy .hd li {
+    position: relative;
+    margin-left: -1px;
+    height: 37px;
+    line-height: 37px;
+    text-align: center;
+    width: 160px;
+    float: left;
+    border: 1px solid #ddd;
+    border-top: 0;
+    font: normal 14px/37px "Microsoft YaHei";
+    _font-weight: bold;
+    cursor: default;
+}
+
+.www360buy .hd li.on {
+    width: 120px;
+    background: #fff;
+    border-bottom: 1px solid #fff;
+    color: #c00;
+}
+
+.www360buy .bd {
+    height: auto;
+    border: 1px solid #ddd;
+    border-top: 0;
+}
+
+.www360buy .lh {
+    overflow: hidden;
+}
+
+.www360buy .lh li {
+    width: 104px;
+    padding: 0 10px;
+    float: left;
+}
+
+.www360buy .lh li .p-img {
+    width: 99px;
+    height: 106px;
+    padding: 9px 0px 0 13px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.www360buy .lh li .p-name {
+    height: 36px;
+    line-height: 18px;
+    word-break: break-all;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
+.www360buy .lh li .p-price {
+    color: #999;
+}
+
+.www360buy .lh li .p-price strong {
+    color: #c00;
+    font-size: 14px;
+    font-family: verdana;
+}

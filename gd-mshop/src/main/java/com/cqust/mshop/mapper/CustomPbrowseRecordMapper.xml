@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cqust.mshop.mapper.CustomPbrowseRecordMapper">
+	<select id="getPbrowseRecordList" parameterType="java.lang.Integer"
+		resultType="com.cqust.mshop.pojo.CustomPbrowseRecord">
+
+		SELECT
+		r.id,r.pid,p.pName pname,r.username,r.browsetime,r.usertype,r.userip,r.sid
+		from t_pbrowserecord r,t_product p
+		WHERE r.sid = #{sid} AND r.pid =
+		p.id
+	</select>
+
+
+</mapper>

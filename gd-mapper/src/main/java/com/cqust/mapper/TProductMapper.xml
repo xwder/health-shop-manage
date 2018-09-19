@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cqust.mapper.TProductMapper" >
+  <resultMap id="BaseResultMap" type="com.cqust.pojo.TProduct" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="storeid" property="storeid" jdbcType="INTEGER" />
+    <result column="pName" property="pname" jdbcType="VARCHAR" />
+    <result column="pms" property="pms" jdbcType="VARCHAR" />
+    <result column="pPrice" property="pprice" jdbcType="DOUBLE" />
+    <result column="pPic" property="ppic" jdbcType="VARCHAR" />
+    <result column="pCreatTime" property="pcreattime" jdbcType="TIMESTAMP" />
+    <result column="is_hot" property="isHot" jdbcType="INTEGER" />
+    <result column="pStock" property="pstock" jdbcType="INTEGER" />
+    <result column="pSellNum" property="psellnum" jdbcType="INTEGER" />
+    <result column="is_sell" property="isSell" jdbcType="INTEGER" />
+    <result column="pType" property="ptype" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.cqust.pojo.TProduct" extends="BaseResultMap" >
+    <result column="pDesc" property="pdesc" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, storeid, pName, pms, pPrice, pPic, pCreatTime, is_hot, pStock, pSellNum, is_sell, 
+    pType
+  </sql>
+  <sql id="Blob_Column_List" >
+    pDesc
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.cqust.pojo.TProductExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cqust.pojo.TProductExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_product
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_product
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cqust.pojo.TProductExample" >
+    delete from t_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cqust.pojo.TProduct" >
+    insert into t_product (id, storeid, pName, 
+      pms, pPrice, pPic, pCreatTime, 
+      is_hot, pStock, pSellNum, 
+      is_sell, pType, pDesc
+      )
+    values (#{id,jdbcType=INTEGER}, #{storeid,jdbcType=INTEGER}, #{pname,jdbcType=VARCHAR}, 
+      #{pms,jdbcType=VARCHAR}, #{pprice,jdbcType=DOUBLE}, #{ppic,jdbcType=VARCHAR}, #{pcreattime,jdbcType=TIMESTAMP}, 
+      #{isHot,jdbcType=INTEGER}, #{pstock,jdbcType=INTEGER}, #{psellnum,jdbcType=INTEGER}, 
+      #{isSell,jdbcType=INTEGER}, #{ptype,jdbcType=VARCHAR}, #{pdesc,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cqust.pojo.TProduct" >
+    insert into t_product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="storeid != null" >
+        storeid,
+      </if>
+      <if test="pname != null" >
+        pName,
+      </if>
+      <if test="pms != null" >
+        pms,
+      </if>
+      <if test="pprice != null" >
+        pPrice,
+      </if>
+      <if test="ppic != null" >
+        pPic,
+      </if>
+      <if test="pcreattime != null" >
+        pCreatTime,
+      </if>
+      <if test="isHot != null" >
+        is_hot,
+      </if>
+      <if test="pstock != null" >
+        pStock,
+      </if>
+      <if test="psellnum != null" >
+        pSellNum,
+      </if>
+      <if test="isSell != null" >
+        is_sell,
+      </if>
+      <if test="ptype != null" >
+        pType,
+      </if>
+      <if test="pdesc != null" >
+        pDesc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="storeid != null" >
+        #{storeid,jdbcType=INTEGER},
+      </if>
+      <if test="pname != null" >
+        #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="pms != null" >
+        #{pms,jdbcType=VARCHAR},
+      </if>
+      <if test="pprice != null" >
+        #{pprice,jdbcType=DOUBLE},
+      </if>
+      <if test="ppic != null" >
+        #{ppic,jdbcType=VARCHAR},
+      </if>
+      <if test="pcreattime != null" >
+        #{pcreattime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isHot != null" >
+        #{isHot,jdbcType=INTEGER},
+      </if>
+      <if test="pstock != null" >
+        #{pstock,jdbcType=INTEGER},
+      </if>
+      <if test="psellnum != null" >
+        #{psellnum,jdbcType=INTEGER},
+      </if>
+      <if test="isSell != null" >
+        #{isSell,jdbcType=INTEGER},
+      </if>
+      <if test="ptype != null" >
+        #{ptype,jdbcType=VARCHAR},
+      </if>
+      <if test="pdesc != null" >
+        #{pdesc,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cqust.pojo.TProductExample" resultType="java.lang.Integer" >
+    select count(*) from t_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_product
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.storeid != null" >
+        storeid = #{record.storeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.pname != null" >
+        pName = #{record.pname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pms != null" >
+        pms = #{record.pms,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pprice != null" >
+        pPrice = #{record.pprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ppic != null" >
+        pPic = #{record.ppic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pcreattime != null" >
+        pCreatTime = #{record.pcreattime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isHot != null" >
+        is_hot = #{record.isHot,jdbcType=INTEGER},
+      </if>
+      <if test="record.pstock != null" >
+        pStock = #{record.pstock,jdbcType=INTEGER},
+      </if>
+      <if test="record.psellnum != null" >
+        pSellNum = #{record.psellnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.isSell != null" >
+        is_sell = #{record.isSell,jdbcType=INTEGER},
+      </if>
+      <if test="record.ptype != null" >
+        pType = #{record.ptype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pdesc != null" >
+        pDesc = #{record.pdesc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_product
+    set id = #{record.id,jdbcType=INTEGER},
+      storeid = #{record.storeid,jdbcType=INTEGER},
+      pName = #{record.pname,jdbcType=VARCHAR},
+      pms = #{record.pms,jdbcType=VARCHAR},
+      pPrice = #{record.pprice,jdbcType=DOUBLE},
+      pPic = #{record.ppic,jdbcType=VARCHAR},
+      pCreatTime = #{record.pcreattime,jdbcType=TIMESTAMP},
+      is_hot = #{record.isHot,jdbcType=INTEGER},
+      pStock = #{record.pstock,jdbcType=INTEGER},
+      pSellNum = #{record.psellnum,jdbcType=INTEGER},
+      is_sell = #{record.isSell,jdbcType=INTEGER},
+      pType = #{record.ptype,jdbcType=VARCHAR},
+      pDesc = #{record.pdesc,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_product
+    set id = #{record.id,jdbcType=INTEGER},
+      storeid = #{record.storeid,jdbcType=INTEGER},
+      pName = #{record.pname,jdbcType=VARCHAR},
+      pms = #{record.pms,jdbcType=VARCHAR},
+      pPrice = #{record.pprice,jdbcType=DOUBLE},
+      pPic = #{record.ppic,jdbcType=VARCHAR},
+      pCreatTime = #{record.pcreattime,jdbcType=TIMESTAMP},
+      is_hot = #{record.isHot,jdbcType=INTEGER},
+      pStock = #{record.pstock,jdbcType=INTEGER},
+      pSellNum = #{record.psellnum,jdbcType=INTEGER},
+      is_sell = #{record.isSell,jdbcType=INTEGER},
+      pType = #{record.ptype,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cqust.pojo.TProduct" >
+    update t_product
+    <set >
+      <if test="storeid != null" >
+        storeid = #{storeid,jdbcType=INTEGER},
+      </if>
+      <if test="pname != null" >
+        pName = #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="pms != null" >
+        pms = #{pms,jdbcType=VARCHAR},
+      </if>
+      <if test="pprice != null" >
+        pPrice = #{pprice,jdbcType=DOUBLE},
+      </if>
+      <if test="ppic != null" >
+        pPic = #{ppic,jdbcType=VARCHAR},
+      </if>
+      <if test="pcreattime != null" >
+        pCreatTime = #{pcreattime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isHot != null" >
+        is_hot = #{isHot,jdbcType=INTEGER},
+      </if>
+      <if test="pstock != null" >
+        pStock = #{pstock,jdbcType=INTEGER},
+      </if>
+      <if test="psellnum != null" >
+        pSellNum = #{psellnum,jdbcType=INTEGER},
+      </if>
+      <if test="isSell != null" >
+        is_sell = #{isSell,jdbcType=INTEGER},
+      </if>
+      <if test="ptype != null" >
+        pType = #{ptype,jdbcType=VARCHAR},
+      </if>
+      <if test="pdesc != null" >
+        pDesc = #{pdesc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.cqust.pojo.TProduct" >
+    update t_product
+    set storeid = #{storeid,jdbcType=INTEGER},
+      pName = #{pname,jdbcType=VARCHAR},
+      pms = #{pms,jdbcType=VARCHAR},
+      pPrice = #{pprice,jdbcType=DOUBLE},
+      pPic = #{ppic,jdbcType=VARCHAR},
+      pCreatTime = #{pcreattime,jdbcType=TIMESTAMP},
+      is_hot = #{isHot,jdbcType=INTEGER},
+      pStock = #{pstock,jdbcType=INTEGER},
+      pSellNum = #{psellnum,jdbcType=INTEGER},
+      is_sell = #{isSell,jdbcType=INTEGER},
+      pType = #{ptype,jdbcType=VARCHAR},
+      pDesc = #{pdesc,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cqust.pojo.TProduct" >
+    update t_product
+    set storeid = #{storeid,jdbcType=INTEGER},
+      pName = #{pname,jdbcType=VARCHAR},
+      pms = #{pms,jdbcType=VARCHAR},
+      pPrice = #{pprice,jdbcType=DOUBLE},
+      pPic = #{ppic,jdbcType=VARCHAR},
+      pCreatTime = #{pcreattime,jdbcType=TIMESTAMP},
+      is_hot = #{isHot,jdbcType=INTEGER},
+      pStock = #{pstock,jdbcType=INTEGER},
+      pSellNum = #{psellnum,jdbcType=INTEGER},
+      is_sell = #{isSell,jdbcType=INTEGER},
+      pType = #{ptype,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,24 @@
+#content .content_right {
+    width: 78%;
+    height: auto;
+    float: right;
+    margin-top: 13px;
+}
+
+#tubiao{
+	display: inline-block;
+    margin: 0 5px -5px 0;
+    width: 14px;
+    height: 18px;
+    background-repeat: no-repeat;
+}
+
+#zchytb{
+	display: inline-block;
+    float: left;
+    margin: 3px 3px 0 0;
+    _margin: 1px 2px 0 0;
+    width: 14px;
+    height: 14px;
+    background: url(/images/infologo/zcgy.png);
+}

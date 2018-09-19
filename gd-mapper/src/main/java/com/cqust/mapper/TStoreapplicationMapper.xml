@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cqust.mapper.TStoreapplicationMapper" >
+  <resultMap id="BaseResultMap" type="com.cqust.pojo.TStoreapplication" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="ownname" property="ownname" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="uId" property="uid" jdbcType="VARCHAR" />
+    <result column="uidimageurl" property="uidimageurl" jdbcType="VARCHAR" />
+    <result column="storeName" property="storename" jdbcType="VARCHAR" />
+    <result column="storeAddr" property="storeaddr" jdbcType="VARCHAR" />
+    <result column="detailaddr" property="detailaddr" jdbcType="VARCHAR" />
+    <result column="storeLicenseid" property="storelicenseid" jdbcType="VARCHAR" />
+    <result column="licenseimageurl" property="licenseimageurl" jdbcType="VARCHAR" />
+    <result column="storeType" property="storetype" jdbcType="INTEGER" />
+    <result column="sqDate" property="sqdate" jdbcType="TIMESTAMP" />
+    <result column="sqStatus" property="sqstatus" jdbcType="INTEGER" />
+    <result column="storelogoimg" property="storelogoimg" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, userId, ownname, phone, uId, uidimageurl, storeName, storeAddr, detailaddr, storeLicenseid, 
+    licenseimageurl, storeType, sqDate, sqStatus, storelogoimg
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cqust.pojo.TStoreapplicationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_storeapplication
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_storeapplication
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_storeapplication
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cqust.pojo.TStoreapplicationExample" >
+    delete from t_storeapplication
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cqust.pojo.TStoreapplication" >
+    insert into t_storeapplication (id, userId, ownname, 
+      phone, uId, uidimageurl, 
+      storeName, storeAddr, detailaddr, 
+      storeLicenseid, licenseimageurl, storeType, 
+      sqDate, sqStatus, storelogoimg
+      )
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{ownname,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, #{uidimageurl,jdbcType=VARCHAR}, 
+      #{storename,jdbcType=VARCHAR}, #{storeaddr,jdbcType=VARCHAR}, #{detailaddr,jdbcType=VARCHAR}, 
+      #{storelicenseid,jdbcType=VARCHAR}, #{licenseimageurl,jdbcType=VARCHAR}, #{storetype,jdbcType=INTEGER}, 
+      #{sqdate,jdbcType=TIMESTAMP}, #{sqstatus,jdbcType=INTEGER}, #{storelogoimg,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cqust.pojo.TStoreapplication" >
+    insert into t_storeapplication
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="ownname != null" >
+        ownname,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="uid != null" >
+        uId,
+      </if>
+      <if test="uidimageurl != null" >
+        uidimageurl,
+      </if>
+      <if test="storename != null" >
+        storeName,
+      </if>
+      <if test="storeaddr != null" >
+        storeAddr,
+      </if>
+      <if test="detailaddr != null" >
+        detailaddr,
+      </if>
+      <if test="storelicenseid != null" >
+        storeLicenseid,
+      </if>
+      <if test="licenseimageurl != null" >
+        licenseimageurl,
+      </if>
+      <if test="storetype != null" >
+        storeType,
+      </if>
+      <if test="sqdate != null" >
+        sqDate,
+      </if>
+      <if test="sqstatus != null" >
+        sqStatus,
+      </if>
+      <if test="storelogoimg != null" >
+        storelogoimg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="ownname != null" >
+        #{ownname,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="uidimageurl != null" >
+        #{uidimageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="storename != null" >
+        #{storename,jdbcType=VARCHAR},
+      </if>
+      <if test="storeaddr != null" >
+        #{storeaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="detailaddr != null" >
+        #{detailaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="storelicenseid != null" >
+        #{storelicenseid,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseimageurl != null" >
+        #{licenseimageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="storetype != null" >
+        #{storetype,jdbcType=INTEGER},
+      </if>
+      <if test="sqdate != null" >
+        #{sqdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sqstatus != null" >
+        #{sqstatus,jdbcType=INTEGER},
+      </if>
+      <if test="storelogoimg != null" >
+        #{storelogoimg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cqust.pojo.TStoreapplicationExample" resultType="java.lang.Integer" >
+    select count(*) from t_storeapplication
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_storeapplication
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ownname != null" >
+        ownname = #{record.ownname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uid != null" >
+        uId = #{record.uid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uidimageurl != null" >
+        uidimageurl = #{record.uidimageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storename != null" >
+        storeName = #{record.storename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storeaddr != null" >
+        storeAddr = #{record.storeaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detailaddr != null" >
+        detailaddr = #{record.detailaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storelicenseid != null" >
+        storeLicenseid = #{record.storelicenseid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.licenseimageurl != null" >
+        licenseimageurl = #{record.licenseimageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storetype != null" >
+        storeType = #{record.storetype,jdbcType=INTEGER},
+      </if>
+      <if test="record.sqdate != null" >
+        sqDate = #{record.sqdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sqstatus != null" >
+        sqStatus = #{record.sqstatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.storelogoimg != null" >
+        storelogoimg = #{record.storelogoimg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_storeapplication
+    set id = #{record.id,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
+      ownname = #{record.ownname,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      uId = #{record.uid,jdbcType=VARCHAR},
+      uidimageurl = #{record.uidimageurl,jdbcType=VARCHAR},
+      storeName = #{record.storename,jdbcType=VARCHAR},
+      storeAddr = #{record.storeaddr,jdbcType=VARCHAR},
+      detailaddr = #{record.detailaddr,jdbcType=VARCHAR},
+      storeLicenseid = #{record.storelicenseid,jdbcType=VARCHAR},
+      licenseimageurl = #{record.licenseimageurl,jdbcType=VARCHAR},
+      storeType = #{record.storetype,jdbcType=INTEGER},
+      sqDate = #{record.sqdate,jdbcType=TIMESTAMP},
+      sqStatus = #{record.sqstatus,jdbcType=INTEGER},
+      storelogoimg = #{record.storelogoimg,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cqust.pojo.TStoreapplication" >
+    update t_storeapplication
+    <set >
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="ownname != null" >
+        ownname = #{ownname,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        uId = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="uidimageurl != null" >
+        uidimageurl = #{uidimageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="storename != null" >
+        storeName = #{storename,jdbcType=VARCHAR},
+      </if>
+      <if test="storeaddr != null" >
+        storeAddr = #{storeaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="detailaddr != null" >
+        detailaddr = #{detailaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="storelicenseid != null" >
+        storeLicenseid = #{storelicenseid,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseimageurl != null" >
+        licenseimageurl = #{licenseimageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="storetype != null" >
+        storeType = #{storetype,jdbcType=INTEGER},
+      </if>
+      <if test="sqdate != null" >
+        sqDate = #{sqdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sqstatus != null" >
+        sqStatus = #{sqstatus,jdbcType=INTEGER},
+      </if>
+      <if test="storelogoimg != null" >
+        storelogoimg = #{storelogoimg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cqust.pojo.TStoreapplication" >
+    update t_storeapplication
+    set userId = #{userid,jdbcType=INTEGER},
+      ownname = #{ownname,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      uId = #{uid,jdbcType=VARCHAR},
+      uidimageurl = #{uidimageurl,jdbcType=VARCHAR},
+      storeName = #{storename,jdbcType=VARCHAR},
+      storeAddr = #{storeaddr,jdbcType=VARCHAR},
+      detailaddr = #{detailaddr,jdbcType=VARCHAR},
+      storeLicenseid = #{storelicenseid,jdbcType=VARCHAR},
+      licenseimageurl = #{licenseimageurl,jdbcType=VARCHAR},
+      storeType = #{storetype,jdbcType=INTEGER},
+      sqDate = #{sqdate,jdbcType=TIMESTAMP},
+      sqStatus = #{sqstatus,jdbcType=INTEGER},
+      storelogoimg = #{storelogoimg,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,20 @@
+@charset "utf-8";
+/* CSS Document */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,blockquote,th,td,p{margin:0;padding:0}
+input,button,select,textarea{outline:none}
+li{list-style:none}img{border:none}textarea{resize:none}
+body{color:#727272;background:#fff;word-break:break-all;word-wrap:break-word;text-align:center}
+body,input,textarea{font-size:12px;font-family:\5b8b\4f53,Verdana,Arial}
+
+a,a:link{color:#727272;text-decoration:none}
+a:visited{color:#727272;text-decoration:none}
+a:hover{color:#c3141b;text-decoration:underline}
+a:active{color:#727272}
+     
+
+.clear{ height:0; overflow:hidden; font-size:0; line-height:0; clear:both;}
+
+
+.clearfloat:after{display:block;clear:both;content:"";visibility:hidden;height:0}
+
+.clearfloat{zoom:1}

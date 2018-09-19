@@ -1,0 +1,47 @@
+#comment .rate-grid {
+    width: 100%;
+}
+#comment .rate-grid table {
+    width: 100%;
+    table-layout: fixed;
+}
+#comment tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+#comment .rate-grid table tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+#comment .rate-grid td {
+    padding: 16px 7px;
+    border-bottom: 1px solid #e3e3e3;
+}
+#comment .rate-grid .col-meta {
+    width: 235px;
+    color: #999;
+}
+#comment .rate-grid .col-author {
+    padding-right: 0;
+}
+#comment .rate-grid .tm-rate-content {
+    color: #333;
+}
+#comment .rate-grid .tm-rate-date {
+    clear: both;
+    color: #ccc;
+}
+#comment .rate-grid .rate-sku {
+    margin-bottom: 3px;
+}
+#comment .rate-grid .rate-user-info {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 95px;
+}
+#comment .rate-grid .rate-user-info span {
+    color: #999;
+}

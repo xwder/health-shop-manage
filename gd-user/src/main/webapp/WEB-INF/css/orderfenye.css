@@ -1,0 +1,8 @@
+.pagelist { font-size:12px; font-family:Verdana;float: right;}
+.pagelist a { color:#333; text-decoration:none;}
+.pagelist ul { list-style:none;float:right;}
+.pagelist {width:600px; margin:30px auto; padding:6px 0px; height:20px;}
+.pagelist ul li { float:left; /* border:1px solid ;  */height:30px; line-height:30px; margin:0px 5px;}
+.pagelist ul li a, .pageinfo { display:block; padding:0px 6px; }
+.pageinfo  { color:#555;}
+.current { background:#d7342e; display:block; padding:0px 6px; font-weight:bold;}

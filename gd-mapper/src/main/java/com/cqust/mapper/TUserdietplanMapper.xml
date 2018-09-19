@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cqust.mapper.TUserdietplanMapper" >
+  <resultMap id="BaseResultMap" type="com.cqust.pojo.TUserdietplan" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="dietitionId" property="dietitionid" jdbcType="INTEGER" />
+    <result column="dietDay" property="dietday" jdbcType="TIMESTAMP" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.cqust.pojo.TUserdietplanWithBLOBs" extends="BaseResultMap" >
+    <result column="breakfast" property="breakfast" jdbcType="VARBINARY" />
+    <result column="lunch" property="lunch" jdbcType="VARBINARY" />
+    <result column="dinner" property="dinner" jdbcType="VARBINARY" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, userId, dietitionId, dietDay, remarks
+  </sql>
+  <sql id="Blob_Column_List" >
+    breakfast, lunch, dinner
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.cqust.pojo.TUserdietplanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_userdietplan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cqust.pojo.TUserdietplanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_userdietplan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_userdietplan
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_userdietplan
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cqust.pojo.TUserdietplanExample" >
+    delete from t_userdietplan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cqust.pojo.TUserdietplanWithBLOBs" >
+    insert into t_userdietplan (id, userId, dietitionId, 
+      dietDay, remarks, breakfast, 
+      lunch, dinner)
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{dietitionid,jdbcType=INTEGER}, 
+      #{dietday,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR}, #{breakfast,jdbcType=VARBINARY}, 
+      #{lunch,jdbcType=VARBINARY}, #{dinner,jdbcType=VARBINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cqust.pojo.TUserdietplanWithBLOBs" >
+    insert into t_userdietplan
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="dietitionid != null" >
+        dietitionId,
+      </if>
+      <if test="dietday != null" >
+        dietDay,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="breakfast != null" >
+        breakfast,
+      </if>
+      <if test="lunch != null" >
+        lunch,
+      </if>
+      <if test="dinner != null" >
+        dinner,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="dietitionid != null" >
+        #{dietitionid,jdbcType=INTEGER},
+      </if>
+      <if test="dietday != null" >
+        #{dietday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="breakfast != null" >
+        #{breakfast,jdbcType=VARBINARY},
+      </if>
+      <if test="lunch != null" >
+        #{lunch,jdbcType=VARBINARY},
+      </if>
+      <if test="dinner != null" >
+        #{dinner,jdbcType=VARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cqust.pojo.TUserdietplanExample" resultType="java.lang.Integer" >
+    select count(*) from t_userdietplan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_userdietplan
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.dietitionid != null" >
+        dietitionId = #{record.dietitionid,jdbcType=INTEGER},
+      </if>
+      <if test="record.dietday != null" >
+        dietDay = #{record.dietday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remarks != null" >
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.breakfast != null" >
+        breakfast = #{record.breakfast,jdbcType=VARBINARY},
+      </if>
+      <if test="record.lunch != null" >
+        lunch = #{record.lunch,jdbcType=VARBINARY},
+      </if>
+      <if test="record.dinner != null" >
+        dinner = #{record.dinner,jdbcType=VARBINARY},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_userdietplan
+    set id = #{record.id,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
+      dietitionId = #{record.dietitionid,jdbcType=INTEGER},
+      dietDay = #{record.dietday,jdbcType=TIMESTAMP},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      breakfast = #{record.breakfast,jdbcType=VARBINARY},
+      lunch = #{record.lunch,jdbcType=VARBINARY},
+      dinner = #{record.dinner,jdbcType=VARBINARY}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_userdietplan
+    set id = #{record.id,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
+      dietitionId = #{record.dietitionid,jdbcType=INTEGER},
+      dietDay = #{record.dietday,jdbcType=TIMESTAMP},
+      remarks = #{record.remarks,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cqust.pojo.TUserdietplanWithBLOBs" >
+    update t_userdietplan
+    <set >
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="dietitionid != null" >
+        dietitionId = #{dietitionid,jdbcType=INTEGER},
+      </if>
+      <if test="dietday != null" >
+        dietDay = #{dietday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="breakfast != null" >
+        breakfast = #{breakfast,jdbcType=VARBINARY},
+      </if>
+      <if test="lunch != null" >
+        lunch = #{lunch,jdbcType=VARBINARY},
+      </if>
+      <if test="dinner != null" >
+        dinner = #{dinner,jdbcType=VARBINARY},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.cqust.pojo.TUserdietplanWithBLOBs" >
+    update t_userdietplan
+    set userId = #{userid,jdbcType=INTEGER},
+      dietitionId = #{dietitionid,jdbcType=INTEGER},
+      dietDay = #{dietday,jdbcType=TIMESTAMP},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      breakfast = #{breakfast,jdbcType=VARBINARY},
+      lunch = #{lunch,jdbcType=VARBINARY},
+      dinner = #{dinner,jdbcType=VARBINARY}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cqust.pojo.TUserdietplan" >
+    update t_userdietplan
+    set userId = #{userid,jdbcType=INTEGER},
+      dietitionId = #{dietitionid,jdbcType=INTEGER},
+      dietDay = #{dietday,jdbcType=TIMESTAMP},
+      remarks = #{remarks,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

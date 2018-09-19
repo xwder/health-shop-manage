@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cqust.nutritionist.mapper.VipMapper">
+
+	<select id="geTUserinfos" parameterType="java.lang.Integer"
+		resultType="com.cqust.pojo.TUserinfo">
+		select * from t_userinfo where dietitianId=${value} order by createdTime desc
+	</select>
+	
+	<select id="geTUserhealthinfos" parameterType="java.lang.Integer" resultType="com.cqust.pojo.TUserhealthinfo">
+	    select * from t_userhealthinfo where userid=${value} 
+	</select>
+	
+	<select id="getVipapplication" parameterType="java.lang.Integer" resultType="com.cqust.pojo.TVipdietapplication">
+	    select * from t_vipdietapplication where dietitianId=${value} and sqStatus=2
+	</select>
+	
+    <delete id="deleteVip" parameterType="java.lang.Integer">
+        update t_userinfo set dietitianId = 0 where id = ${value}
+        delete from t_vipdietapplication where userId = #{0} and dietitianId = #{1}
+    </delete>
+</mapper>

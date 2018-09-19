@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cqust.nutritionist.mapper.CommentMapper">
+
+	<select id="getUnreplycomment" parameterType="java.lang.Integer"
+		resultType="com.cqust.pojo.TUncomment">
+		select * from t_uncomment where nid=${value} and isreply = 0 order by commenttime desc
+	</select>
+	
+	<select id="getReplycomment" parameterType="java.lang.Integer" resultType="com.cqust.pojo.TUncomment">
+	   select * from t_uncomment where nid=${value} and isreply = 1 order by commenttime desc
+	</select>
+	
+	<select id="getSingleReplycomment" parameterType="java.lang.Integer" resultType="com.cqust.pojo.TUncomment">
+	   select * from t_uncomment where id=${value} and isreply = 1 
+	</select>
+	
+	<select id="getSingleUnReplycomment" parameterType="java.lang.Integer" resultType="com.cqust.pojo.TUncomment">
+	   select * from t_uncomment where id=${value} and isreply = 0 
+	</select>
+</mapper>

@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cqust.mapper.TFoodnutritionMapper" >
+  <resultMap id="BaseResultMap" type="com.cqust.pojo.TFoodnutrition" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="foodid" property="foodid" jdbcType="INTEGER" />
+    <result column="eatPart" property="eatpart" jdbcType="VARCHAR" />
+    <result column="energy" property="energy" jdbcType="VARCHAR" />
+    <result column="waterContent" property="watercontent" jdbcType="VARCHAR" />
+    <result column="protein" property="protein" jdbcType="VARCHAR" />
+    <result column="fat" property="fat" jdbcType="VARCHAR" />
+    <result column="dietaryFiber" property="dietaryfiber" jdbcType="VARCHAR" />
+    <result column="carbohydrate" property="carbohydrate" jdbcType="VARCHAR" />
+    <result column="vitaminsA" property="vitaminsa" jdbcType="VARCHAR" />
+    <result column="vitaminsB1" property="vitaminsb1" jdbcType="VARCHAR" />
+    <result column="vitaminsB2" property="vitaminsb2" jdbcType="VARCHAR" />
+    <result column="vitaminsC" property="vitaminsc" jdbcType="VARCHAR" />
+    <result column="vitaminsE" property="vitaminse" jdbcType="VARCHAR" />
+    <result column="niacin" property="niacin" jdbcType="VARCHAR" />
+    <result column="na" property="na" jdbcType="VARCHAR" />
+    <result column="calcium" property="calcium" jdbcType="VARCHAR" />
+    <result column="iron" property="iron" jdbcType="VARCHAR" />
+    <result column="cholesterol" property="cholesterol" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, foodid, eatPart, energy, waterContent, protein, fat, dietaryFiber, carbohydrate, 
+    vitaminsA, vitaminsB1, vitaminsB2, vitaminsC, vitaminsE, niacin, na, calcium, iron, 
+    cholesterol
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cqust.pojo.TFoodnutritionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_foodnutrition
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_foodnutrition
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_foodnutrition
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cqust.pojo.TFoodnutritionExample" >
+    delete from t_foodnutrition
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cqust.pojo.TFoodnutrition" >
+    insert into t_foodnutrition (id, foodid, eatPart, 
+      energy, waterContent, protein, 
+      fat, dietaryFiber, carbohydrate, 
+      vitaminsA, vitaminsB1, vitaminsB2, 
+      vitaminsC, vitaminsE, niacin, 
+      na, calcium, iron, 
+      cholesterol)
+    values (#{id,jdbcType=INTEGER}, #{foodid,jdbcType=INTEGER}, #{eatpart,jdbcType=VARCHAR}, 
+      #{energy,jdbcType=VARCHAR}, #{watercontent,jdbcType=VARCHAR}, #{protein,jdbcType=VARCHAR}, 
+      #{fat,jdbcType=VARCHAR}, #{dietaryfiber,jdbcType=VARCHAR}, #{carbohydrate,jdbcType=VARCHAR}, 
+      #{vitaminsa,jdbcType=VARCHAR}, #{vitaminsb1,jdbcType=VARCHAR}, #{vitaminsb2,jdbcType=VARCHAR}, 
+      #{vitaminsc,jdbcType=VARCHAR}, #{vitaminse,jdbcType=VARCHAR}, #{niacin,jdbcType=VARCHAR}, 
+      #{na,jdbcType=VARCHAR}, #{calcium,jdbcType=VARCHAR}, #{iron,jdbcType=VARCHAR}, 
+      #{cholesterol,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cqust.pojo.TFoodnutrition" >
+    insert into t_foodnutrition
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="foodid != null" >
+        foodid,
+      </if>
+      <if test="eatpart != null" >
+        eatPart,
+      </if>
+      <if test="energy != null" >
+        energy,
+      </if>
+      <if test="watercontent != null" >
+        waterContent,
+      </if>
+      <if test="protein != null" >
+        protein,
+      </if>
+      <if test="fat != null" >
+        fat,
+      </if>
+      <if test="dietaryfiber != null" >
+        dietaryFiber,
+      </if>
+      <if test="carbohydrate != null" >
+        carbohydrate,
+      </if>
+      <if test="vitaminsa != null" >
+        vitaminsA,
+      </if>
+      <if test="vitaminsb1 != null" >
+        vitaminsB1,
+      </if>
+      <if test="vitaminsb2 != null" >
+        vitaminsB2,
+      </if>
+      <if test="vitaminsc != null" >
+        vitaminsC,
+      </if>
+      <if test="vitaminse != null" >
+        vitaminsE,
+      </if>
+      <if test="niacin != null" >
+        niacin,
+      </if>
+      <if test="na != null" >
+        na,
+      </if>
+      <if test="calcium != null" >
+        calcium,
+      </if>
+      <if test="iron != null" >
+        iron,
+      </if>
+      <if test="cholesterol != null" >
+        cholesterol,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="foodid != null" >
+        #{foodid,jdbcType=INTEGER},
+      </if>
+      <if test="eatpart != null" >
+        #{eatpart,jdbcType=VARCHAR},
+      </if>
+      <if test="energy != null" >
+        #{energy,jdbcType=VARCHAR},
+      </if>
+      <if test="watercontent != null" >
+        #{watercontent,jdbcType=VARCHAR},
+      </if>
+      <if test="protein != null" >
+        #{protein,jdbcType=VARCHAR},
+      </if>
+      <if test="fat != null" >
+        #{fat,jdbcType=VARCHAR},
+      </if>
+      <if test="dietaryfiber != null" >
+        #{dietaryfiber,jdbcType=VARCHAR},
+      </if>
+      <if test="carbohydrate != null" >
+        #{carbohydrate,jdbcType=VARCHAR},
+      </if>
+      <if test="vitaminsa != null" >
+        #{vitaminsa,jdbcType=VARCHAR},
+      </if>
+      <if test="vitaminsb1 != null" >
+        #{vitaminsb1,jdbcType=VARCHAR},
+      </if>
+      <if test="vitaminsb2 != null" >
+        #{vitaminsb2,jdbcType=VARCHAR},
+      </if>
+      <if test="vitaminsc != null" >
+        #{vitaminsc,jdbcType=VARCHAR},
+      </if>
+      <if test="vitaminse != null" >
+        #{vitaminse,jdbcType=VARCHAR},
+      </if>
+      <if test="niacin != null" >
+        #{niacin,jdbcType=VARCHAR},
+      </if>
+      <if test="na != null" >
+        #{na,jdbcType=VARCHAR},
+      </if>
+      <if test="calcium != null" >
+        #{calcium,jdbcType=VARCHAR},
+      </if>
+      <if test="iron != null" >
+        #{iron,jdbcType=VARCHAR},
+      </if>
+      <if test="cholesterol != null" >
+        #{cholesterol,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cqust.pojo.TFoodnutritionExample" resultType="java.lang.Integer" >
+    select count(*) from t_foodnutrition
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_foodnutrition
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.foodid != null" >
+        foodid = #{record.foodid,jdbcType=INTEGER},
+      </if>
+      <if test="record.eatpart != null" >
+        eatPart = #{record.eatpart,jdbcType=VARCHAR},
+      </if>
+      <if test="record.energy != null" >
+        energy = #{record.energy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.watercontent != null" >
+        waterContent = #{record.watercontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.protein != null" >
+        protein = #{record.protein,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fat != null" >
+        fat = #{record.fat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dietaryfiber != null" >
+        dietaryFiber = #{record.dietaryfiber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carbohydrate != null" >
+        carbohydrate = #{record.carbohydrate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vitaminsa != null" >
+        vitaminsA = #{record.vitaminsa,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vitaminsb1 != null" >
+        vitaminsB1 = #{record.vitaminsb1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vitaminsb2 != null" >
+        vitaminsB2 = #{record.vitaminsb2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vitaminsc != null" >
+        vitaminsC = #{record.vitaminsc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vitaminse != null" >
+        vitaminsE = #{record.vitaminse,jdbcType=VARCHAR},
+      </if>
+      <if test="record.niacin != null" >
+        niacin = #{record.niacin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.na != null" >
+        na = #{record.na,jdbcType=VARCHAR},
+      </if>
+      <if test="record.calcium != null" >
+        calcium = #{record.calcium,jdbcType=VARCHAR},
+      </if>
+      <if test="record.iron != null" >
+        iron = #{record.iron,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cholesterol != null" >
+        cholesterol = #{record.cholesterol,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_foodnutrition
+    set id = #{record.id,jdbcType=INTEGER},
+      foodid = #{record.foodid,jdbcType=INTEGER},
+      eatPart = #{record.eatpart,jdbcType=VARCHAR},
+      energy = #{record.energy,jdbcType=VARCHAR},
+      waterContent = #{record.watercontent,jdbcType=VARCHAR},
+      protein = #{record.protein,jdbcType=VARCHAR},
+      fat = #{record.fat,jdbcType=VARCHAR},
+      dietaryFiber = #{record.dietaryfiber,jdbcType=VARCHAR},
+      carbohydrate = #{record.carbohydrate,jdbcType=VARCHAR},
+      vitaminsA = #{record.vitaminsa,jdbcType=VARCHAR},
+      vitaminsB1 = #{record.vitaminsb1,jdbcType=VARCHAR},
+      vitaminsB2 = #{record.vitaminsb2,jdbcType=VARCHAR},
+      vitaminsC = #{record.vitaminsc,jdbcType=VARCHAR},
+      vitaminsE = #{record.vitaminse,jdbcType=VARCHAR},
+      niacin = #{record.niacin,jdbcType=VARCHAR},
+      na = #{record.na,jdbcType=VARCHAR},
+      calcium = #{record.calcium,jdbcType=VARCHAR},
+      iron = #{record.iron,jdbcType=VARCHAR},
+      cholesterol = #{record.cholesterol,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cqust.pojo.TFoodnutrition" >
+    update t_foodnutrition
+    <set >
+      <if test="foodid != null" >
+        foodid = #{foodid,jdbcType=INTEGER},
+      </if>
+      <if test="eatpart != null" >
+        eatPart = #{eatpart,jdbcType=VARCHAR},
+      </if>
+      <if test="energy != null" >
+        energy = #{energy,jdbcType=VARCHAR},
+      </if>
+      <if test="watercontent != null" >
+        waterContent = #{watercontent,jdbcType=VARCHAR},
+      </if>
+      <if test="protein != null" >
+        protein = #{protein,jdbcType=VARCHAR},
+      </if>
+      <if test="fat != null" >
+        fat = #{fat,jdbcType=VARCHAR},
+      </if>
+      <if test="dietaryfiber != null" >
+        dietaryFiber = #{dietaryfiber,jdbcType=VARCHAR},
+      </if>
+      <if test="carbohydrate != null" >
+        carbohydrate = #{carbohydrate,jdbcType=VARCHAR},
+      </if>
+      <if test="vitaminsa != null" >
+        vitaminsA = #{vitaminsa,jdbcType=VARCHAR},
+      </if>
+      <if test="vitaminsb1 != null" >
+        vitaminsB1 = #{vitaminsb1,jdbcType=VARCHAR},
+      </if>
+      <if test="vitaminsb2 != null" >
+        vitaminsB2 = #{vitaminsb2,jdbcType=VARCHAR},
+      </if>
+      <if test="vitaminsc != null" >
+        vitaminsC = #{vitaminsc,jdbcType=VARCHAR},
+      </if>
+      <if test="vitaminse != null" >
+        vitaminsE = #{vitaminse,jdbcType=VARCHAR},
+      </if>
+      <if test="niacin != null" >
+        niacin = #{niacin,jdbcType=VARCHAR},
+      </if>
+      <if test="na != null" >
+        na = #{na,jdbcType=VARCHAR},
+      </if>
+      <if test="calcium != null" >
+        calcium = #{calcium,jdbcType=VARCHAR},
+      </if>
+      <if test="iron != null" >
+        iron = #{iron,jdbcType=VARCHAR},
+      </if>
+      <if test="cholesterol != null" >
+        cholesterol = #{cholesterol,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cqust.pojo.TFoodnutrition" >
+    update t_foodnutrition
+    set foodid = #{foodid,jdbcType=INTEGER},
+      eatPart = #{eatpart,jdbcType=VARCHAR},
+      energy = #{energy,jdbcType=VARCHAR},
+      waterContent = #{watercontent,jdbcType=VARCHAR},
+      protein = #{protein,jdbcType=VARCHAR},
+      fat = #{fat,jdbcType=VARCHAR},
+      dietaryFiber = #{dietaryfiber,jdbcType=VARCHAR},
+      carbohydrate = #{carbohydrate,jdbcType=VARCHAR},
+      vitaminsA = #{vitaminsa,jdbcType=VARCHAR},
+      vitaminsB1 = #{vitaminsb1,jdbcType=VARCHAR},
+      vitaminsB2 = #{vitaminsb2,jdbcType=VARCHAR},
+      vitaminsC = #{vitaminsc,jdbcType=VARCHAR},
+      vitaminsE = #{vitaminse,jdbcType=VARCHAR},
+      niacin = #{niacin,jdbcType=VARCHAR},
+      na = #{na,jdbcType=VARCHAR},
+      calcium = #{calcium,jdbcType=VARCHAR},
+      iron = #{iron,jdbcType=VARCHAR},
+      cholesterol = #{cholesterol,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

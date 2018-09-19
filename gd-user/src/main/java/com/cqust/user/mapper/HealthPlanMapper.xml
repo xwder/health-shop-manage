@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cqust.user.mapper.HealthPlanMapper">
+	<select id="getTDietplans" parameterType="java.lang.Integer" resultType="com.cqust.pojo.TDietplanbyself">
+		select * from t_dietplanbyself where userid = #{0} order by plandate
+	</select>
+	
+	<select id="getFoodplanIndex"  resultType="com.cqust.pojo.TPlanindexbyself">
+	    SELECT * from t_planindexbyself WHERE plantype = 0 and id in (SELECT MAX(id) from t_planindexbyself)
+	</select>
+		
+	<select id="getSportplanIndex"  resultType="com.cqust.pojo.TPlanindexbyself">
+	    SELECT * from t_planindexbyself WHERE plantype = 1 and id in (SELECT MAX(id) from t_planindexbyself)
+	</select>
+	
+	<select id="getdietplanindex" parameterType="java.lang.Integer" resultType="com.cqust.pojo.TPlanindexbyself">
+	    SELECT * from t_planindexbyself WHERE plantype = 0 and userid = #{0} 
+	</select>
+	
+	<select id="getsportplanindex" parameterType="java.lang.Integer" resultType="com.cqust.pojo.TPlanindexbyself">
+	    SELECT * from t_planindexbyself WHERE plantype = 1 and userid = #{0}
+	</select>
+	
+	<select id="getdietplanindexBydate" resultType="com.cqust.pojo.TPlanindexbyself">
+	    SELECT * from t_planindexbyself WHERE plantype = 0 and id in (SELECT planid from t_dietplanbyself where userid=#{0} and plandate=#{1} group by planid)
+	</select>
+	
+	<select id="getsportplanindexBydate" resultType="com.cqust.pojo.TPlanindexbyself">
+	    SELECT * from t_planindexbyself WHERE plantype = 1 and id in (SELECT planid from t_sportplanbyself where userid=#{0} and plandate=#{1} group by planid)
+	</select>
+</mapper>

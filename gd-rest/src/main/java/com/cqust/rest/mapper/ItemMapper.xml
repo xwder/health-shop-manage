@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cqust.rest.mapper.ItemMapper">
+
+	<select id="getHotItemList" resultType="com.cqust.pojo.TProduct">
+		SELECT
+		*
+		FROM
+		t_product
+		where is_hot = 1 and is_sell = 1
+		order by pCreatTime desc
+	</select>
+	<select id="getHotItemListByType" parameterType="java.lang.String"
+		resultType="com.cqust.pojo.TProduct">
+		SELECT
+		*
+		FROM
+		t_product
+		where is_hot = 1
+		and is_sell = 1
+		and
+		pType = #{itemType}
+		order by pCreatTime desc
+	</select>
+
+	<select id="bestSellersItems" resultType="com.cqust.pojo.TProduct">
+		SELECT
+		*
+		FROM
+		t_product t
+		order BY t.pSellNum desc
+	</select>
+
+	<select id="newestItems" resultType="com.cqust.pojo.TProduct">
+		SELECT
+		*
+		FROM
+		t_product t
+		order
+		BY t.pCreatTime desc
+	</select>
+
+	<select id="commentItems" resultType="com.cqust.rest.pojo.CustomItem">
+		SELECT t.pid pid,
+		COUNT(t.pid) pcount
+		FROM
+		t_pcomment t
+		GROUP
+		BY t.pId
+		ORDER BY pcount desc
+	</select>
+
+
+
+	<select id="panicBuyItems" resultType="com.cqust.rest.pojo.CustomItem">
+		SELECT t.pid
+		pid,count(t.pid)
+		pcount
+		FROM t_orderitem t
+		GROUP BY t.pid
+		ORDER BY pcount desc
+	</select>
+
+
+	<select id="userlikeItems" parameterType="java.lang.Integer"
+		resultType="com.cqust.rest.pojo.CustomItem">
+		SELECT t.pid pid,COUNT(t.pid) pcount
+		FROM t_pbrowserecord t
+		<if test="uid  != null and uid !=''">
+			where t.uid = #{uid}
+		</if>
+		GROUP BY t.pid
+		ORDER BY pcount desc
+	</select>
+
+
+
+</mapper>

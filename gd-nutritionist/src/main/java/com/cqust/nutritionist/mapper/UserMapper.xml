@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cqust.nutritionist.mapper.UserMapper">
+	<select id="geTUserinfo" parameterType="java.lang.Integer" resultType="com.cqust.nutritionist.pojo.NutritionistInfo">
+		select a.id,a.sex,a.phone,a.email,b.uid,b.dietlicense 
+        from t_userinfo a,t_dietapplication b
+        where
+        a.id = ${value} and b.userId = ${value}
+	</select>	
+</mapper>

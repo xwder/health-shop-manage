@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cqust.user.mapper.CommentMapper">
+
+	<select id="getcommentrecord" parameterType="java.lang.Integer"
+		resultType="com.cqust.pojo.TUncomment">
+		select * from t_uncomment where uid=${value} order by commenttime desc
+	</select>
+	
+	
+	<select id="getsinglecomment" parameterType="java.lang.Integer" resultType="com.cqust.pojo.TUncomment">
+	    select * from t_uncomment where id=${value} 
+	</select>
+	
+	<select id="messageremind" parameterType="java.lang.Integer" resultType="com.cqust.pojo.TMessageremind">
+	    select * from t_messageremind where userid=${value} order by messagetime desc
+	</select>
+	
+</mapper>

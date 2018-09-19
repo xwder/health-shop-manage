@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cqust.rest.mapper.CustomOrderMapper">
+
+	<resultMap id="OrderResultMap" type="com.cqust.pojo.TOrder">
+		<id column="id" property="id"   />
+		<result column="total" property="total" />
+		<result column="orderTime" property="ordertime" />
+		<result column="orderStates" property="orderstates" />
+		<result column="userName" property="username" />
+		<result column="userPhone" property="userphone" />
+		<result column="userAddr" property="useraddr" />
+		<result column="userId" property="userid" />
+		<result column="message" property="message" />
+		<result column="delstatus" property="delstatus" />
+		<result column="ordercomment" property="ordercomment" />
+	</resultMap>
+
+	<select id="listStoreOrderByOrderStatus"  resultType="com.cqust.pojo.TOrder" parameterType="java.util.Map">
+		SELECT
+		*
+		FROM
+		t_order
+		where 1=1
+		<if test="sid  != null and sid !=''">
+			and storeid = #{sid}
+		</if>
+		<if test="orderstatus  != null and orderstatus !=''">
+			and orderStates = #{orderstatus}
+		</if>
+	</select>
+	
+
+	
+
+</mapper>

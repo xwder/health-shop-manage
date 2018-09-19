@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cqust.shop.mapper.OrderMapper">
+
+	<insert id="createOrder" useGeneratedKeys="true" keyProperty="id"
+		parameterType="com.cqust.pojo.TOrder">
+		insert into t_order(total,orderTime,OrderStates,userName,userPhone,userAddr,userId,storeid,message,delstatus,ordercomment)
+		values(#{total},#{ordertime},#{orderstates},#{username},#{userphone},#{useraddr},#{userid},#{storeid},#{message},#{delstatus},#{ordercomment})
+	</insert>
+
+
+
+</mapper>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cqust.shop.mapper.MyItemMapper">
+
+	<resultMap id="BaseResultMap" type="com.cqust.shop.pojo.ItemInfo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="storeid" property="storeid" />
+		<result column="ppic" property="ppic" />
+		<result column="pprice" property="pprice" />
+		<result column="pStock" property="pStock" />
+		<result column="pname" property="pname" />
+		<result column="sid" property="sid" />
+		<result column="storename" property="storename" />
+		<result column="sdz" property="sdz" />
+		<result column="pSellNum" property="psellnum" />
+		
+	</resultMap>
+	<resultMap id="productResultMap" type="com.cqust.pojo.TProduct">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="storeid" property="storeid" />
+		<result column="pName" property="pname" />
+		<result column="pms" property="pms" />
+		<result column="pPrice" property="pprice" />
+		<result column="pPic" property="ppic" />
+		<result column="pDesc" property="pdesc" />
+		<result column="pCreatTime" property="pcreattime" />
+		<result column="is_hot" property="isHot" />
+		<result column="pStock" property="pstock" />
+		<result column="pSellNum" property="psellnum" />
+		<result column="is_sell" property="isSell" />
+		<result column="pType" property="ptype" />
+
+	</resultMap>
+
+	<select id="getItemList" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		SELECT
+		t_product.id,t_product.storeid storeid,t_product.pName,t_product.pPrice
+		pprice,t_product.pStock,t_product.pPic,t_product.pSellNum
+		psellnum,t_product.pCreatTime pcreattime ,
+		t_storeinfo.id
+		sid,t_storeinfo.storeName,t_storeinfo.sdz
+		FROM t_product
+		, t_storeinfo
+		WHERE 1=1
+		and t_product.storeid = t_storeinfo.id
+		and
+		t_product.is_sell =
+		1
+
+		<if test="storeid  != null and storeid !=''">
+			AND t_product.storeid = #{storeid}
+		</if>
+		<if test="query  != null and query !=''">
+			AND t_product.pName like concat(concat('%',#{query}),'%')
+		</if>
+		<if test="sdz  != null and sdz !=''">
+			AND t_storeinfo.sdz like concat(concat('%',#{sdz}),'%')
+		</if>
+		<if test="itemtype != null and itemtype !=''">
+			AND t_product.pType like
+			concat(concat('%',#{itemtype}),'%')
+		</if>
+		<if test="sdz != null and sdz !=''">
+			AND t_storeinfo.sdz like concat(concat('%',#{sdz}),'%')
+		</if>
+
+		<if test="price != null and price !=''">
+			<if test='price == "1"'>
+				ORDER BY pprice desc
+			</if>
+			<if test='price == "0"'>
+				ORDER BY pprice asc
+			</if>
+		</if>
+		<if test="sssj != null and sssj !=''">
+			<if test='sssj == "1"'>
+				ORDER BY pcreattime desc
+			</if>
+			<if test='sssj == "0"'>
+				ORDER BY pcreattime asc
+			</if>
+		</if>
+		<if test="sellnum != null and sellnum !=''">
+			<if test='sellnum == "1"'>
+				order by psellnum desc
+			</if>
+			<if test='sellnum == "0"'>
+				order by psellnum asc
+			</if>
+		</if>
+
+	</select>
+
+
+	<select id="getItemsBySellCount" resultMap="productResultMap">
+		SELECT *
+		FROM t_product
+		<if test="sid  != null and sid !=''">
+			where t_product.storeid = #{sid,jdbcType=INTEGER}
+		</if>
+		<if test="sortType  != null and sortType !=''">
+			ORDER BY pSellNum desc
+		</if>
+		limit 5;
+
+	</select>
+
+
+
+</mapper>
